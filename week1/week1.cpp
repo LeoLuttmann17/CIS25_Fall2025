@@ -3,9 +3,9 @@
 using namespace std;
  
 int main() {
-    // Print greeting message with escape characters
-    cout << "Hello Inventory System!\n";
-    cout << "Welcome to the Inventory Program.\n\n";
+    // Print greeting message to the user
+    cout << "Hello my friend! I know you are eager to buy some veggies, but do you know much to pay in total?\n";
+    cout << "Welcome to my Inventory CalculatorProgram.\n\n";
  
     // Demonstrating escape characters
     cout << "Here are some escape characters in action:\n";
