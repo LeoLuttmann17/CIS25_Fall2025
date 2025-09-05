@@ -18,4 +18,4 @@ Here’s what it looks like when you run it:
 Enter item name: Apples
 Enter quantity: 5
 Enter cost: 1.25
-Total cost for Apples: $6.25
+The total cost for Apples is $6.25
