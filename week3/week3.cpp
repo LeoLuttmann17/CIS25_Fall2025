@@ -1,23 +1,19 @@
-// main.cpp
-#include <iostream>
-using namespace std;
+#include <iostream> 
+using namespace std; 
+
+int main() { 
+	string itemName; 
+	int quantity; 
+	float cost; 
  
-int main() {
-    // Print greeting message with escape characters
-    cout << "Hello Inventory System!\n";
-    cout << "Welcome to the Inventory Program.\n\n";
+// Ask the user for required inputs 
+	cout << "Enter item name: "; 
+	cin >> itemName; 
+	cout << "Enter quantity: "; 
+	cin >> quantity; 
+	cout << "Enter cost: "; 
+	cin >> cost; 
  
-    // Demonstrating escape characters
-    cout << "Here are some escape characters in action:\n";
-    cout << "\t- Tabbed line\n";
-    cout << "This is a backslash: \\\n";
-    cout << "This is a double quote: \"Hello!\"\n\n";
- 
-    // Output sizes of basic data types
-    cout << "Data Type Sizes:\n";
-    cout << "\tSize of int: " << sizeof(int) << " bytes\n";
-    cout << "\tSize of float: " << sizeof(float) << " bytes\n";
-    cout << "\tSize of char: " << sizeof(char) << " byte\n";
- 
-    return 0;
-}
+	cout << "The total cost for " << itemName << " is $" << (quantity * cost) << endl; 
+	return 0; 
+} 
