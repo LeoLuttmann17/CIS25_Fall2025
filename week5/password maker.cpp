@@ -34,20 +34,18 @@ string strongPassword() {
     return password;
 }
 
-// Function to generate a medium password
+// Function to generate a medium password (no "years" input)
 string mediumPassword() {
     string name;
     int birthYear;
-    int years;
 
     cout << "Enter your name: ";
     cin >> name;
     cout << "Enter your year of birth: ";
     cin >> birthYear;
-    cout << "Enter how many years (e.g., since something important): ";
-    cin >> years;
 
-    return name + to_string(years) + to_string(birthYear);
+    // Combine name and birth year for password
+    return name + to_string(birthYear);
 }
 
 // Function to generate a weak password
