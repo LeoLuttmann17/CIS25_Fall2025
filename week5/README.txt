@@ -8,26 +8,8 @@ it, it greets you and asks how strong you want your password to be.
 -   **Strong (1)** -- Makes a 7-character password with letters,
     numbers, and symbols. It always has at least two numbers and two
     special characters.
--   **Medium (2)** -- Asks for your name, your birth year, and a number
-    of years, then uses those to create a password.
+-   **Medium (2)** -- Asks for your name and your birth year, then uses those to create a password.
 -   **Weak (3)** -- Just prints the word "password."
-
-## How to Run It
-
-1.  Save the code in a file called `password_maker.cpp`.
-
-2.  Open a terminal or command prompt in the same folder.
-
-3.  Compile it with:
-
-    ``` bash
-    g++ password_maker.cpp -o password_maker
-    ```
-
-4.  Run it:
-
-    -   On Mac or Linux: `./password_maker`
-    -   On Windows: `password_maker.exe`
 
 ## Example
 
