@@ -1,0 +1,11 @@
+README
+
+This program shows how to use structs, dynamic memory, and binary search in C++.
+
+It creates a list of 100 grocery items. Each item has a name and an ID number.
+The program asks the user to type in an item ID, then it searches for that item using binary search.
+
+If the item is found, it prints the ID and name.
+If not, it says the item was not found.
+
+The program also checks for invalid input and deletes the memory before it ends.
