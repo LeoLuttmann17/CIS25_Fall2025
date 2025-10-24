@@ -1,0 +1,46 @@
+# Bank Account Simulation (C++)
+
+Welcome to **Leo's Bank Account Simulation!**  
+This C++ program lets you manage a simple digital bank account — deposit money, make purchases, check your balance, and view your transaction history.  
+
+All transactions are automatically saved to a file so you can keep track of your account activity.
+
+---
+
+## Project Structure
+
+| File Name | Description |
+|------------|-------------|
+| `main.cpp` | Main program that runs the bank account simulation. |
+| `BankAccount.h` | Declares the `BankAccount` class and its core functions. |
+| `InputValidation.h` | Contains helper functions to check for valid user inputs. |
+| `Menu.h` | Displays the main menu options. |
+| `transactions.txt` | Auto-generated file that stores your transaction history. |
+
+---
+
+## Features
+
+ **Deposit Money** – Add funds to your account.  
+ **Make a Purchase** – Buy items; amount is deducted from your balance.  
+ **Check Balance** – Display your current balance.  
+ **View Transaction History** – Review all past deposits and purchases.  
+ **Exit Program** – Close the simulation safely.  
+
+---
+
+## How It Works
+
+- You start with a **$1000.00** balance.  
+- All deposits and purchases are recorded in `transactions.txt`.  
+- Invalid inputs (like letters in amount fields) are safely handled.  
+- If no transactions exist yet, the program displays a friendly message.  
+
+---
+
+## How to Compile and Run
+
+Open your terminal and navigate to the folder that contains your project files.
+
+```bash
+cd /path/to/bank_sim
