@@ -1,0 +1,38 @@
+Leo's Inventory Program
+
+Description:
+This is a simple C++ console program that helps you manage a small inventory.
+It greets the user once at the start, shows a menu of options, and allows you to view, add, or search for items.
+It uses a class called Item to store the name and quantity of each item.
+
+****************************************************************************************************
+
+Features
+- Prints a friendly welcome message once at the beginning.
+- Shows a clear menu with options to:
+- View existing inventory
+- Enter new item names and quantities
+- Search for an item by name
+- xit the program
+
+Prevents invalid inputs:
+- Rejects empty or special-character names.
+- Accepts only positive numbers for quantities.
+- If you enter something invalid, it politely asks you to try again.
+
+If an item cannot be found, it says:
+- “Oops, I can’t find this. Please try again or type QUIT to exit.”
+
+After every completed action, it asks: “What do you want to do next?” and shows the menu again.
+
+****************************************************************************************************
+
+HOW IT WORKS
+- When the program starts, it greets the user.
+- It preloads 5 sample coffee items (like Espresso, Latte, Mocha, etc.).
+
+- The user picks an action from the menu:
+    Option 1: Shows the list of all items and their quantities.
+    Option 2: Lets you re-enter 5 new items and their quantities.
+    Option 3: Lets you search for an item by typing its name.
+    Option 0: Ends the program.

@@ -8,22 +8,11 @@ struct Item {
     int id; 
 };
 
-// Implement a binary search function to find an item by id. 
-int binarySearch(Item* items, int size, int targetId) {
-    int left = 0;
-    int right = size - 1;
-
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-
-        if (items[mid].id == targetId) {
-            return mid; // Found
-        }
-        else if (items[mid].id < targetId) {
-            left = mid + 1;
-        }
-        else {
-            right = mid - 1;
+// Implement a linear search function to find an item by id. 
+int linearSearch(Item* items, int size, int targetId) {
+    for (int i = 0; i < size; ++i) {
+        if (items[i].id == targetId) {
+            return i; // Found
         }
     }
     return -1; // Not found
@@ -58,10 +47,10 @@ int main() {
         inventory[i].name = itemNames[i];
     }
     
-    // Sort the array by ID (for binary search to work correctly)
+    // Sort the array by name (alphabetically)
     for (int i = 0; i < 99; ++i) {
         for (int j = 0; j < 99 - i; ++j) {
-            if (inventory[j].id > inventory[j + 1].id) {
+            if (inventory[j].name > inventory[j + 1].name) {
                 // Swap items
                 Item temp = inventory[j];
                 inventory[j] = inventory[j + 1];
@@ -89,7 +78,7 @@ int main() {
         return 0;
     }
 
-    int resultIndex = binarySearch(inventory, 100, targetId);
+    int resultIndex = linearSearch(inventory, 100, targetId);
     if (resultIndex != -1) {
         cout << "Item found: ID = " << inventory[resultIndex].id 
              << ", Name = " << inventory[resultIndex].name << endl;
