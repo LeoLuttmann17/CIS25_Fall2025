@@ -1,0 +1,78 @@
+# Mars Weather Data Analyzer
+
+A C++ program that reads and analyzes Mars weather data from a CSV file.
+
+## Overview
+
+This program loads Mars weather data collected by NASA's Curiosity rover and calculates average minimum and maximum temperatures by month.
+
+## Features
+
+- **CSV Parsing**: Reads Mars weather data from a CSV file with proper handling of:
+  - Header row (automatically skipped)
+  - NaN values for missing temperature and wind speed data
+  - Negative temperature values
+
+- **Data Structure**: Uses a `MarsWeatherData` struct to store:
+  - ID
+  - Terrestrial date
+  - Sol (Martian day)
+  - LS (Solar longitude)
+  - Month
+  - Min/Max temperatures (°C)
+  - Pressure (Pa)
+  - Wind speed
+  - Atmospheric opacity
+
+- **Analysis**: Calculates and displays average minimum and maximum temperatures organized by month (1-12)
+
+## Classes
+
+### `MarsWeatherData` (struct)
+Holds individual weather record data from Mars.
+
+### `MarsWeatherCSVReader` (class)
+- `load(file_path)` - Loads CSV data from the specified file
+- `head(n)` - Returns the first N records
+- `size()` - Returns total number of records
+- `getRecords()` - Returns all records
+
+## Helper Functions
+
+- `getMonthName(monthNum)` - Converts month number (1-12) to month name
+- `extractMonthNumber(monthStr)` - Extracts month number from "Month X" format
+- `printRecord(data)` - Prints a single weather record
+
+## How to Compile
+
+```bash
+g++ -o Week15 Week15.cpp
+```
+
+## How to Run
+
+```bash
+./Week15
+```
+
+**Note**: Update the `file_path` variable in `main()` to point to your Mars weather CSV file location.
+
+## Sample Output
+
+```
+Loading Mars weather data from: /path/to/mars-weather.csv
+Successfully loaded 1867 records.
+
+Average Minimum and Maximum Temperatures by Month:
+========================================
+Month               Avg Min Temp (°C)   Avg Max Temp (°C)        Records
+--------------------------------------------------------
+January                       -75.23              -25.45            156
+February                      -78.12              -28.90            142
+...
+```
+
+## Data Source
+
+Mars weather data is collected by NASA's Curiosity rover on the surface of Mars.
+
