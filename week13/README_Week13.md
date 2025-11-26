@@ -1,56 +1,21 @@
-# Week 13 - C++ Object-Oriented Programming: Product Class
+# Week 13 - Product Class
 
-## Overview
-This project demonstrates fundamental Object-Oriented Programming (OOP) concepts in C++ by implementing a `Product` class with encapsulation, constructors, destructors, and member functions.
+## What this program does
+This program creates a Product with an ID (4567), a name (Ice Cream), and a price ($2.99). Then it prints all those details to the screen. The program also shows when the constructor and destructor are called.
 
 ## Files
+- Week13.cpp - main file
+- Product.h - header file
+- Product.cpp - class functions
 
-| File | Description |
-|------|-------------|
-| `Week13.cpp` | Main driver program |
-| `Product.h` | Header file with class declaration |
-| `Product.cpp` | Implementation file with method definitions |
+## How to run
+g++ -o Week13 Week13.cpp Product.cpp
+./Week13
 
-## Class Structure
-
-### Product Class
-
-**Private Attributes:**
-- `int id` — Product identifier
-- `string name` — Product name
-- `double price` — Product price
-
-**Public Methods:**
-- `Product(int i, string n, double p)` — Constructor
-- `~Product()` — Destructor
-- `getId()` — Returns product ID
-- `getName()` — Returns product name
-- `getPrice()` — Returns product price
-- `setPrice(double p)` — Sets product price
-- `printDetails()` — Displays product information
-
-## Compilation
-
-```bash
-g++ -o Week13 Week13.cpp Product.cpp && ./Week13
-```
-
-## Sample Output
-
-```
+## Output
 Howdy! Constructor called
 
 Printing details below:
 ID: 4567, Name: Ice Cream, Price: $2.99
 
 Howdy! Destructor called
-```
-
-## Concepts Demonstrated
-
-1. **Encapsulation** — Private data members with public accessors
-2. **Constructor** — Initializes object with member initializer list
-3. **Destructor** — Called automatically when object goes out of scope
-4. **Getters/Setters** — Controlled access to private members
-5. **Header Guards** — Separation of declaration (.h) and implementation (.cpp)
-
