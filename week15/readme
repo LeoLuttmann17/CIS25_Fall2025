@@ -6,42 +6,44 @@ A C++ program that reads and analyzes Mars weather data from a CSV file.
 
 This program loads Mars weather data collected by NASA's Curiosity rover and calculates average minimum and maximum temperatures by month.
 
-## Features
+## Project Structure
 
-- **CSV Parsing**: Reads Mars weather data from a CSV file with proper handling of:
-  - Header row (automatically skipped)
-  - NaN values for missing temperature and wind speed data
-  - Negative temperature values
+```
+Week6/
+├── Week15.cpp              # Main source file with implementation
+├── Week15.h                # Combined header file (all declarations)
+├── MarsWeatherData.h       # Data structure header
+├── MarsWeatherCSVReader.h  # CSV reader class header
+└── README.md               # This file
+```
 
-- **Data Structure**: Uses a `MarsWeatherData` struct to store:
-  - ID
-  - Terrestrial date
-  - Sol (Martian day)
-  - LS (Solar longitude)
-  - Month
-  - Min/Max temperatures (°C)
-  - Pressure (Pa)
-  - Wind speed
-  - Atmospheric opacity
+## Header Files
 
-- **Analysis**: Calculates and displays average minimum and maximum temperatures organized by month (1-12)
+### `Week15.h`
+Combined header containing all declarations. Use this for simple single-include usage.
 
-## Classes
+### `MarsWeatherData.h`
+Contains the `MarsWeatherData` struct:
+- `id` - Record ID
+- `terrestrial_date` - Earth date
+- `sol` - Martian day
+- `ls` - Solar longitude
+- `month` - Month string
+- `min_temp` / `max_temp` - Temperature in °C
+- `pressure` - Atmospheric pressure in Pa
+- `wind_speed` - Wind speed (can be "NaN")
+- `atmo_opacity` - Atmospheric opacity
 
-### `MarsWeatherData` (struct)
-Holds individual weather record data from Mars.
-
-### `MarsWeatherCSVReader` (class)
-- `load(file_path)` - Loads CSV data from the specified file
-- `head(n)` - Returns the first N records
-- `size()` - Returns total number of records
-- `getRecords()` - Returns all records
-
-## Helper Functions
-
-- `getMonthName(monthNum)` - Converts month number (1-12) to month name
-- `extractMonthNumber(monthStr)` - Extracts month number from "Month X" format
-- `printRecord(data)` - Prints a single weather record
+### `MarsWeatherCSVReader.h`
+Contains the CSV reader class and helper functions:
+- `MarsWeatherCSVReader` class
+  - `load(file_path)` - Load CSV data from file
+  - `head(n)` - Get first N records
+  - `size()` - Get total record count
+  - `getRecords()` - Get all records
+- `getMonthName(monthNum)` - Convert month number to name
+- `extractMonthNumber(monthStr)` - Extract month number from "Month X" format
+- `printRecord(data)` - Print a single weather record
 
 ## How to Compile
 
@@ -72,7 +74,15 @@ February                      -78.12              -28.90            142
 ...
 ```
 
+## Features
+
+- **CSV Parsing**: Reads Mars weather data with proper handling of:
+  - Header row (automatically skipped)
+  - NaN values for missing temperature and wind speed data
+  - Negative temperature values
+
+- **Analysis**: Calculates and displays average minimum and maximum temperatures organized by month (1-12)
+
 ## Data Source
 
 Mars weather data is collected by NASA's Curiosity rover on the surface of Mars.
-
