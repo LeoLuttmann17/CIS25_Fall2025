@@ -12,7 +12,7 @@ This program creates a Product object and prints its details. It shows how class
 g++ -o Week13 Week13.cpp Product.cpp
 ./Week13
 
-## Output
+ Output
 Howdy! Constructor called
 
 Printing details below:
