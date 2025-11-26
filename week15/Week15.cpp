@@ -1,102 +1,124 @@
-#include "Week15.h"
+#include <MarsWeatherData.h>
+#include <MarsWeatherCSVReader.h>
 
-// MarsWeatherCSVReader implementation
 
-MarsWeatherData MarsWeatherCSVReader::parseLine(const std::string& line) {
-    MarsWeatherData data;
-    std::stringstream ss(line);
-    std::string cell;
-    std::vector<std::string> cells;
+// Structure to hold Mars weather data
+struct MarsWeatherData {
+    int id;
+    std::string terrestrial_date;
+    int sol;
+    int ls;
+    std::string month;
+    double min_temp;
+    double max_temp;
+    double pressure;
+    std::string wind_speed;  // Can be "NaN"
+    std::string atmo_opacity;
+};
+
+// CSV parser class
+class MarsWeatherCSVReader {
+private:
+    std::vector<MarsWeatherData> records;
     
-    // Parse CSV line (handles commas)
-    while (std::getline(ss, cell, ',')) {
-        cells.push_back(cell);
-    }
-    
-    // Parse each field
-    if (cells.size() >= 10) {
-        data.id = std::stoi(cells[0]);
-        data.terrestrial_date = cells[1];
-        data.sol = std::stoi(cells[2]);
-        data.ls = std::stoi(cells[3]);
-        data.month = cells[4];
+    // Parse a single line of CSV
+    MarsWeatherData parseLine(const std::string& line) {
+        MarsWeatherData data;
+        std::stringstream ss(line);
+        std::string cell;
+        std::vector<std::string> cells;
         
-        // Handle min_temp (can be negative or NaN)
-        if (cells[5] == "NaN" || cells[5].empty()) {
-            data.min_temp = std::numeric_limits<double>::quiet_NaN();
-        } else {
-            data.min_temp = std::stod(cells[5]);
+        // Parse CSV line (handles commas)
+        while (std::getline(ss, cell, ',')) {
+            cells.push_back(cell);
         }
         
-        // Handle max_temp (can be negative or NaN)
-        if (cells[6] == "NaN" || cells[6].empty()) {
-            data.max_temp = std::numeric_limits<double>::quiet_NaN();
-        } else {
-            data.max_temp = std::stod(cells[6]);
+        // Parse each field
+        if (cells.size() >= 10) {
+            data.id = std::stoi(cells[0]);
+            data.terrestrial_date = cells[1];
+            data.sol = std::stoi(cells[2]);
+            data.ls = std::stoi(cells[3]);
+            data.month = cells[4];
+            
+            // Handle min_temp (can be negative or NaN)
+            if (cells[5] == "NaN" || cells[5].empty()) {
+                data.min_temp = std::numeric_limits<double>::quiet_NaN();
+            } else {
+                data.min_temp = std::stod(cells[5]);
+            }
+            
+            // Handle max_temp (can be negative or NaN)
+            if (cells[6] == "NaN" || cells[6].empty()) {
+                data.max_temp = std::numeric_limits<double>::quiet_NaN();
+            } else {
+                data.max_temp = std::stod(cells[6]);
+            }
+            
+            // Handle pressure
+            data.pressure = std::stod(cells[7]);
+            
+            // Handle wind_speed (can be "NaN")
+            data.wind_speed = cells[8];
+            
+            // Handle atmo_opacity
+            data.atmo_opacity = cells[9];
         }
         
-        // Handle pressure
-        data.pressure = std::stod(cells[7]);
-        
-        // Handle wind_speed (can be "NaN")
-        data.wind_speed = cells[8];
-        
-        // Handle atmo_opacity
-        data.atmo_opacity = cells[9];
+        return data;
     }
-    
-    return data;
-}
 
-bool MarsWeatherCSVReader::load(const std::string& file_path) {
-    std::ifstream file(file_path);
-    if (!file.is_open()) {
-        std::cerr << "Error: Could not open file: " << file_path << std::endl;
-        return false;
-    }
-    
-    std::string line;
-    bool first_line = true;  // Skip header
-    
-    while (std::getline(file, line)) {
-        if (first_line) {
-            first_line = false;
-            continue;  // Skip header row
+public:
+    bool load(const std::string& file_path) {
+        std::ifstream file(file_path);
+        if (!file.is_open()) {
+            std::cerr << "Error: Could not open file: " << file_path << std::endl;
+            return false;
         }
         
-        if (!line.empty()) {
-            try {
-                MarsWeatherData data = parseLine(line);
-                records.push_back(data);
-            } catch (const std::exception& e) {
-                std::cerr << "Warning: Could not parse line: " << line << std::endl;
+        std::string line;
+        bool first_line = true;  // Skip header
+        
+        while (std::getline(file, line)) {
+            if (first_line) {
+                first_line = false;
+                continue;  // Skip header row
+            }
+            
+            if (!line.empty()) {
+                try {
+                    MarsWeatherData data = parseLine(line);
+                    records.push_back(data);
+                } catch (const std::exception& e) {
+                    std::cerr << "Warning: Could not parse line: " << line << std::endl;
+                }
             }
         }
+        
+        file.close();
+        return true;
     }
     
-    file.close();
-    return true;
-}
-
-std::vector<MarsWeatherData> MarsWeatherCSVReader::head(size_t n) {
-    std::vector<MarsWeatherData> result;
-    size_t count = (n < records.size()) ? n : records.size();
-    for (size_t i = 0; i < count; i++) {
-        result.push_back(records[i]);
+    // Get first N records
+    std::vector<MarsWeatherData> head(size_t n = 5) {
+        std::vector<MarsWeatherData> result;
+        size_t count = (n < records.size()) ? n : records.size();
+        for (size_t i = 0; i < count; i++) {
+            result.push_back(records[i]);
+        }
+        return result;
     }
-    return result;
-}
+    
+    size_t size() const {
+        return records.size();
+    }
+    
+    const std::vector<MarsWeatherData>& getRecords() const {
+        return records;
+    }
+};
 
-size_t MarsWeatherCSVReader::size() const {
-    return records.size();
-}
-
-const std::vector<MarsWeatherData>& MarsWeatherCSVReader::getRecords() const {
-    return records;
-}
-
-// Helper function implementations
-
+// Convert month number to month name
 std::string getMonthName(int monthNum) {
     const std::string monthNames[] = {
         "January", "February", "March", "April", "May", "June",
@@ -108,6 +130,7 @@ std::string getMonthName(int monthNum) {
     return "Unknown";
 }
 
+// Extract month number from "Month X" format
 int extractMonthNumber(const std::string& monthStr) {
     // Format is "Month X" where X is 1-12
     if (monthStr.length() > 6 && monthStr.substr(0, 6) == "Month ") {
@@ -120,6 +143,7 @@ int extractMonthNumber(const std::string& monthStr) {
     return 0;
 }
 
+// Print a single record
 void printRecord(const MarsWeatherData& data) {
     std::cout << "ID: " << data.id 
               << ", Date: " << data.terrestrial_date
@@ -133,8 +157,6 @@ void printRecord(const MarsWeatherData& data) {
               << ", Atmo Opacity: " << data.atmo_opacity
               << std::endl;
 }
-
-// Main function
 
 int main() {
     // Path to the Mars weather CSV file
@@ -250,3 +272,4 @@ int main() {
     
     return 0;
 }
+
