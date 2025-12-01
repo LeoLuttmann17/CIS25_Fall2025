@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/leo/src/CIS25_Fall2025/Midterm",
+      "program": "/Users/leo/src/CIS25_Fall2025/Midterm/build/Debug/outDebug"
+    }
+  ]
+}
